@@ -1,0 +1,86 @@
+{%extends 'main_ms.html' %} {%block tittle%} productos comprados {%endblock%}
+
+<div>
+  {%block content%}
+  <table class="mt-16 mx-10">
+    <th class="p-4 border-2 border-stone-300">solicitante</th>
+    <th class="p-4 border-2 border-stone-300">producto</th>
+    <th class="p-4 border-2 border-stone-300">tamaño</th>
+    <th class="p-4 border-2 border-stone-300">precio</th>
+    <th class="p-4 border-2 border-stone-300">fecha de compra</th>
+    <th class="p-4 border-2 border-stone-300">metodo de pago</th>
+    <th class="p-4 border-2 border-stone-300">pago</th>
+    <th class="p-4 border-2 border-stone-300">cambiar estado</th>
+    {%for i in productos%}
+    <tr>
+      <td class="p-4 border-2 border-stone-300">{{i.solicitante}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.producto}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.tamaño}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.precio}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.fechaCompra}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.metodo_pago}}</td>
+      {%if i.pago == False %}
+      <td class="p-4 border-2 border-stone-300">pendiente</td>
+      {%else%}
+      <td class="p-4 border-2 border-stone-300">pago</td>
+      {%endif%}
+      <td class="p-4 border-2 border-stone-300">
+        <button
+          class="hover:scale-110 hover:bg-slate-400 rounded-lg p-1"
+          id="abrir-{{ forloop.counter }}"
+        >
+          cambiar de estado
+        </button>
+
+        <div>
+          <dialog id="modal-{{ forloop.counter }}" class="p-20 rounded-xl">
+            <div>
+              <form action="" method="post" class="space-x-6">
+                {% csrf_token %}
+                <label for="">Pago ?</label>
+                <input type="checkbox" name="pago" id="" value="True" />
+                <input type="hidden" name="id_producto" value="{{i.id}}" />
+
+                <button
+                  type="submit"
+                  class="absolute mt-10 right-36 hover:bg-slate-300 p-2 px-4 rounded-full text-lg"
+                >
+                  editar
+                </button>
+              </form>
+            </div>
+            <button
+              id="cerrar-{{ forloop.counter }}"
+              class="ml-14 mt-0.5 hover:bg-slate-300 p-2 px-4 rounded-full text-lg"
+            >
+              cerrar
+            </button>
+          </dialog>
+        </div>
+      </td>
+    </tr>
+    {%endfor%}
+  </table>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const botonesAbrir = document.querySelectorAll('[id^="abrir-"]');
+      const modales = document.querySelectorAll('[id^="modal-"]');
+      const botonesCerrar = document.querySelectorAll('[id^="cerrar-"]');
+
+      botonesAbrir.forEach((boton, index) => {
+        boton.addEventListener("click", () => {
+          modales[index].showModal();
+        });
+      });
+
+      botonesCerrar.forEach((boton, index) => {
+        boton.addEventListener("click", () => {
+          modales[index].close();
+        });
+      });
+    });
+  </script>
+
+  {%endblock%}
+</div>

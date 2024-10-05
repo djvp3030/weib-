@@ -1,0 +1,28 @@
+{%extends 'main_ms.html' %} {%block tittle%} añadir tamaños {%endblock%}
+<div>
+  {%block content%}
+
+    <form
+      method="post"
+      enctype="multipart/form-data"
+
+    >
+    <div class="flex justify-center mt-20 space-x-4 ml-44 ">
+      {% csrf_token %} {{form.as_p}}
+
+      <button
+        type="submit"
+        class="font-semibold w-40 text-cyan-200 rounded-lg h-8 bg-black text-md duration-200 hover:scale-110 hover:text-cyan-300 hover:text-lg focus:text-cyan-100"
+      >
+        Enviar
+      </button>
+    <div>
+
+  
+
+      
+
+    </form>
+  </div>
+  {%endblock%}
+</div>

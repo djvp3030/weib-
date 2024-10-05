@@ -1,0 +1,22 @@
+{%extends 'main_ms.html' %} {%block tittle%} editar usuarios {%endblock%}
+
+<div>
+  {%block content%}
+  <div class="ml-44 mt-10">
+    <form
+      method="post"
+      enctype="multipart/form-data"
+      class="content-center space-y-4"
+    >
+      {% csrf_token %} {{form.as_p}}
+      <button
+        type="submit"
+        class="font-semibold w-40 text-cyan-200 rounded-lg h-8 bg-black text-md duration-200 hover:scale-110 hover:text-cyan-300 hover:text-lg focus:text-cyan-100"
+      >
+        Enviar
+      </button>
+    </form>
+
+    {%endblock%}
+  </div>
+</div>

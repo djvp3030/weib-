@@ -1,0 +1,368 @@
+{%extends 'Header_footer.html' %} {% load static %} {%block tittle%} Main
+{%endblock%}
+
+<!-- centro de pag -->
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+/>
+{%block content%}
+<div class="fixed z-50">{% include 'mensajes/mensajes.html' %}</div>
+
+<div>
+  <div class="min-h-screen">
+    <!-- carrusel principal -->
+    <div class="flex items-center w-fit my-3 mx-2 relative z-20">
+      <div class="">
+        <div
+          id="imageCarousel"
+          class="flex overflow-hidden rounded-lg shadow-lg items-center h-96"
+        >
+          <div
+            class="flex transition-transform duration-500 ease-in-out"
+            style="transform: translateX(0%)"
+          >
+            <img
+              src="{%static 'construccion.jpg'%}"
+              class="w-full h-fit flex-shrink-0"
+              alt="Imagen 1"
+            />
+            <img
+              src="{%static 'hogar.jpg'%}"
+              class="w-full h-fit flex-shrink-0"
+              alt="Imagen 2"
+            />
+            <img
+              src="{%static 'Jardineria.jpg'%}"
+              class="w-full h-screen flex-shrink-0"
+              alt="Imagen 3"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Servicios -->
+    <section class="items-center mt-4">
+      <div
+        class="flex justify-center space-x-4 bg-gradient-to-r from-[#33b2d9] from-10%"
+      >
+        <div class="flex relative w-1/2 h-96 self-center">
+          <img src="{%static 'hogar.jpg'%}" alt="" class="rounded-lg" />
+        </div>
+
+        <div
+          class="flex flex-col mt-10 p-6 rounded-lg shadow-lg bg-[#0097b2]/70 mb-12"
+        >
+          <h2 class="text-lg mb-4 mx-2 self-center">Servicios</h2>
+          <p class="text-pretty w-96">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam id
+            architecto ipsam suscipit error ab aperiam asperiores corporis,
+            unde, molestias eaque ratione voluptate nemo et eius? Necessitatibus
+            cum sint sequi. Cumque obcaecati quaerat, vitae, quibusdam quae hic
+            dolor cupiditate repudiandae labore voluptate necessitatibus numquam
+            iste eius? Dolor aut unde repellendus eum explicabo amet dolores
+            illum corrupti non impedit? Vero nostrum, enim expedita laboriosam
+            vitae repellendus debitis eius ex est, quia, quas culpa placeat
+            molestiae harum. Atque exercitationem sapiente ut distinctio et
+            alias, cum dicta, nesciunt temporibus neque, labore perspiciatis
+            provident quo explicabo laborum eos praesentium accusamus beatae ex.
+            Aliquid, minima!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- carrusel servicios  -->
+    <h2 class="flex justify-center text-4xl mt-10 text-[#0097b2]">
+      Algunos de nuestros servicios
+    </h2>
+    <div
+      class="relative w-full max-w-4xl mx-auto overflow-hidden items-center mt-12"
+    >
+      <div
+        id="carousel"
+        class="flex transition-transform duration-500 ease-in-out px-24 space-x-2"
+      >
+        <!-- Tarjeta 1 -->
+        {%for i in services%}
+
+        <div class="duration-300 hover:scale-105 w-1/3 p-4 h-96">
+          <div
+            class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center"
+          >
+            <h2 class="text-lg mb-2 self-center">{{i.nombre}}</h2>
+            <div>
+              <img
+                src="{{i.img_prev.url}}"
+                alt=""
+                class="h-40 w-40 rounded-md"
+              />
+            </div>
+            <a
+              href="{%url 'compS' i.id%}"
+              class="flex justify-center w-40 mt-4 text-lg ease-in duration-300 hover:bg-[#0097b2] bg-[#33b2d9]/40 rounded-md hover:scale-105"
+              >Solicitar ahora
+            </a>
+          </div>
+        </div>
+
+        {%endfor%}
+      </div>
+
+      <!-- Controles -->
+      <button
+        id="prev"
+        class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-[#0097b2] px-4 py-2 rounded-full duration-200 hover:scale-95 active:bg-[#0097b2]/70"
+      >
+        <svg
+          class="h-8 w-8 text-slate-100"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" />
+          <polyline points="15 6 9 12 15 18" />
+        </svg>
+      </button>
+
+      <button
+        id="next"
+        class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-[#0097b2] px-4 py-2 rounded-full duration-200 hover:scale-95 active:bg-[#0097b2]/70"
+      >
+        <svg
+          class="h-8 w-8 text-slate-100"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" />
+          <polyline points="9 6 15 12 9 18" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Tienda -->
+    <section class="items-center">
+      <div
+        class="flex justify-center py-10 space-x-14 ml-8 bg-gradient-to-l from-[#6bcf5a] form-10%"
+      >
+        <div
+          class="flex flex-col mt-10 p-6 rounded-lg shadow-lg mb-12 bg-[#4baa38]/70"
+        >
+          <h2 class="text-lg mb-4 mx-2 self-center">Tienda</h2>
+          <p class="text-pretty w-96">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam id
+            architecto ipsam suscipit error ab aperiam asperiores corporis,
+            unde, molestias eaque ratione voluptate nemo et eius? Necessitatibus
+            cum sint sequi. Cumque obcaecati quaerat, vitae, quibusdam quae hic
+            dolor cupiditate repudiandae labore voluptate necessitatibus numquam
+            iste eius? Dolor aut unde repellendus eum explicabo amet dolores
+            illum corrupti non impedit? Vero nostrum, enim expedita laboriosam
+            vitae repellendus debitis eius ex est, quia, quas culpa placeat
+            molestiae harum. Atque exercitationem sapiente ut distinctio et
+            alias, cum dicta, nesciunt temporibus neque, labore perspiciatis
+            provident quo explicabo laborum eos praesentium accusamus beatae ex.
+            Aliquid, minima!
+          </p>
+        </div>
+        <div class="flex relative w-1/2 h-96 self-center">
+          <img src="{%static 'hogar.jpg'%}" alt="" class="rounded-lg" />
+        </div>
+      </div>
+    </section>
+
+    <!-- carrusel tienda  -->
+    <h2 class="flex justify-center text-4xl mt-10 text-[#4baa38]">
+      Algunos de nuestros Productos
+    </h2>
+    <div
+      class="relative w-full max-w-4xl mx-auto overflow-hidden items-center mt-12"
+    >
+      <div
+        id="carousel"
+        class="flex transition-transform duration-500 ease-in-out px-24 space-x-2"
+      >
+        <!-- Tarjeta 1 -->
+        {%for i in tienda%}
+
+        <div class="duration-300 hover:scale-105 w-1/3 p-4 h-96">
+          <div
+            class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center"
+          >
+            <h2 class="text-lg mb-2 self-center">{{i.nombre}}</h2>
+            <div>
+              <img
+                src="{{i.img_prev.url}}"
+                alt=""
+                class="h-40 w-40 rounded-md"
+              />
+            </div>
+            <a
+              href="{%url 'tiendaC' i.id%}"
+              class="flex justify-center w-40 mt-4 text-lg ease-in duration-300 hover:bg-[#4baa38] rounded-md bg-[#6bcf5a]/60 hover:scale-105"
+              >Comprar ahora</a
+            >
+          </div>
+        </div>
+
+        {%endfor%}
+      </div>
+
+      <!-- Controles -->
+      <button
+        id="prev"
+        class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-[#4baa38] px-4 py-2 rounded-full duration-200 hover:scale-95 active:bg-[#4baa38]/70"
+      >
+        <svg
+          class="h-8 w-8 text-slate-100"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" />
+          <polyline points="15 6 9 12 15 18" />
+        </svg>
+      </button>
+
+      <button
+        id="next"
+        class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-[#4baa38] px-4 py-2 rounded-full duration-200 hover:scale-95 active:bg-[#4baa38]/70"
+      >
+        <svg
+          class="h-8 w-8 text-slate-100"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" />
+          <polyline points="9 6 15 12 9 18" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="flex justify-center">
+      <img src="{%static 'imgs/logo.png'%} " alt="" class="h-80 w-80 mt-14" />
+    </div>
+
+    <!-- carrusel de tarjetas servicios -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const carousel = document.getElementById("carousel");
+        const prevButton = document.getElementById("prev");
+        const nextButton = document.getElementById("next");
+
+        let currentIndex = 0;
+        const cardsToShow = 3; // Número de tarjetas a mostrar a la vez
+        const totalCards = carousel.children.length;
+
+        function updateCarousel() {
+          const offset = -currentIndex * (carousel.clientWidth / cardsToShow);
+          carousel.style.transform = `translateX(${offset}px)`;
+        }
+
+        prevButton.addEventListener("click", function () {
+          if (currentIndex > 0) {
+            currentIndex--;
+            updateCarousel();
+          }
+        });
+
+        nextButton.addEventListener("click", function () {
+          if (currentIndex + cardsToShow < totalCards) {
+            currentIndex++;
+            updateCarousel();
+          }
+        });
+      });
+    </script>
+
+    <!-- carrusel principal -->
+    <script>
+      const imageCarousel =
+        document.getElementById("imageCarousel").firstElementChild;
+
+      let currentIndex = 0;
+
+      function updateImageCarousel() {
+        const width = imageCarousel.clientWidth;
+        imageCarousel.style.transform = `translateX(-${
+          currentIndex * width
+        }px)`;
+      }
+      window.addEventListener("resize", updateImageCarousel);
+
+      setInterval(() => {
+        currentIndex = (currentIndex + 1) % imageCarousel.children.length;
+        updateImageCarousel();
+      }, 4000);
+    </script>
+
+    <!-- carrusel de tarjetas tienda -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const carouselT = document.getElementById("carouselT");
+        const prevButtonT = document.getElementById("prevT");
+        const nextButtonT = document.getElementById("nextT");
+
+        let currentIndexT = 0;
+        const cardsToShowT = 3; // Número de tarjetas a mostrar a la vez
+        const totalCardsT = carouselT.children.length;
+
+        function updateCarousel() {
+          const offset = -currentIndexT * (carousel.clientWidth / cardsToShowT);
+          carousel.style.transform = `translateX(${offset}px)`;
+        }
+
+        prevButtonT.addEventListener("click", function () {
+          if (currentIndexT > 0) {
+            currentIndexT--;
+            updateCarousel();
+          }
+        });
+
+        nextButtonT.addEventListener("click", function () {
+          if (currentIndexT + cardsToShowT < totalCardsT) {
+            currentIndexT++;
+            updateCarousel();
+          }
+        });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const alerts = document.querySelectorAll("#alert-container .relative");
+        alerts.forEach((alert) => {
+          setTimeout(() => {
+            alert.style.transform = "translateX(100%)";
+            setTimeout(() => alert.remove(), 500); // Elimina el elemento después de la animación
+          }, 5000); // Tiempo antes de ocultar el mensaje (5 segundos)
+        });
+      });
+    </script>
+
+    {%endblock%}
+  </div>
+</div>

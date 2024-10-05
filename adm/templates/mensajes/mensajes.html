@@ -1,0 +1,23 @@
+<div id="alert-container">
+  {%if messages%}
+  <div>
+    {%for message in messages %}
+    <div
+      class="fixed top-13 left-1/2 m-4 bg-[#33b2d9]/90 rounded-3xl p-2 space-x-8 px-8 mx-1"
+      id="msg"
+      role="alert"
+    >
+      <span>{{message}}</span>
+
+      <button
+        class="absolute top-2 right-2 text-white"
+        onclick="this.parentElement.style.display='none';"
+      >
+        &times;
+      </button>
+    </div>
+
+    {%endfor%}
+  </div>
+  {%endif%}
+</div>
