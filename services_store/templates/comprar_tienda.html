@@ -66,17 +66,9 @@
       >
         {%for i in size%}
         <option value="">----</option>
-        <option
-          value="{{i.id}}"
-          data-precio="{{i.precio}}"
-          data-tamaño="{{i.tamaño}}"
-        >
-          {{i}}
-        </option>
+        <option value="{{i.id}}" data-tamaño="{{i.tamaño}}">{{i}}</option>
         {%endfor%}
       </select>
-
-      <h4 id="precio-etiqueta" class="text-xl">Valor:</h4>
 
       <button
         class="rounded-xl w-40 h-8 hover:bg-slate-300 pb-1.5 text-xl"
@@ -98,22 +90,30 @@
                 name="producto"
               />
               <input type="hidden" value="" id="tamañoF" name="tamaño" />
-              <input type="hidden" value="" id="precioF" name="precio" />
               <input
                 type="hidden"
                 value="{{user.id}}"
                 name="id_user"
                 id="id_user"
               />
-              <label for="" class="my-2"
-                >Porfavor elija su metodo de pago
-              </label>
-              <select name="metodo de pago" id="metodo de pago ">
+              <select name="cantidad" id="cantidad">
                 <option value="">----</option>
-                <option value="transferencia">transferencia</option>
-                <option value="efectivo">efectivo</option>
-                <option value="pago movil">pago movil</option>
+                <option value="1/2 caja">1/2 caja</option>
+                <option value="1 caja">1 caja</option>
+                <option value="2 cajas">2 cajas</option>
+                <option value="3 cajas">3 cajas</option>
+                <option value="4 cajas">4 cajas</option>
+                <option value="personalizado">personalizado</option>
               </select>
+
+              <input type="hidden" name="correo" value="{{user.email}}" />
+              <input type="hidden" name="telefono" value="{{user.telefono}}" />
+              <input
+                type="hidden"
+                name="name"
+                value="{{user.first_name}} {{user.last_name}}"
+              />
+
               <button
                 type="submit"
                 class="flex bg-[#33b2d9] text-white p-2 px-4 rounded-full hover:scale-110 transition duration-300 w-20 mt-4"
@@ -137,13 +137,8 @@
     function actualizarDatos() {
       var select = document.getElementById("tamaño_selector");
       var selectedOption = select.options[select.selectedIndex];
-      var Precio = selectedOption.getAttribute("data-precio");
       var Tamaño = selectedOption.getAttribute("data-tamaño");
 
-      document.getElementById("precio-etiqueta").textContent =
-        "Valor: " + Precio;
-
-      document.getElementById("precioF").value = Precio;
       document.getElementById("tamañoF").value = Tamaño;
     }
   </script>

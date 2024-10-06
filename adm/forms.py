@@ -78,17 +78,15 @@ class productos(forms.ModelForm):
 class Size(forms.ModelForm):
    class Meta:
      model = size
-     fields = ['tamaño','precio','product','id']
+     fields = ['tamaño','product','id']
     
      labels = {
        'tamaño': 'tamaño',
-       'precio': 'precio',
        'product': 'producto'
      }
     
      widgets = {
       'tamaño': forms.TextInput(attrs={'class':'shadow duration-200 hover:scale-105 focus:shadow-md rounded-md ml-2'}),
-      'precio': forms.NumberInput(attrs={'class':'shadow duration-200 hover:scale-105 focus:shadow-md rounded-md ml-2'}           ),
       'product': forms.Select(attrs={'class':'shadow duration-200 hover:scale-105 focus:shadow-md rounded-md ml-2'})
     }
 

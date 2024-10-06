@@ -18,7 +18,6 @@ class producto(models.Model):
 class size(models.Model):
   product = models.ForeignKey('producto', on_delete=models.CASCADE, blank=False, null=False, related_name='Tamaño')
   tamaño = models.CharField(max_length=10, null=True, blank=True)
-  precio = models.DecimalField(decimal_places=2, max_digits=5) 
   
   def __str__(self):
      return self.tamaño

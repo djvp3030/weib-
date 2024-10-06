@@ -875,10 +875,6 @@ select {
   top: 5rem;
 }
 
-.right-1\/2 {
-  right: 50%;
-}
-
 .z-20 {
   z-index: 20;
 }
@@ -985,16 +981,16 @@ select {
   margin-left: 3rem;
 }
 
-.ml-14 {
-  margin-left: 3.5rem;
-}
-
 .ml-16 {
   margin-left: 4rem;
 }
 
 .ml-2 {
   margin-left: 0.5rem;
+}
+
+.ml-20 {
+  margin-left: 5rem;
 }
 
 .ml-24 {
@@ -1007,6 +1003,10 @@ select {
 
 .ml-4 {
   margin-left: 1rem;
+}
+
+.ml-44 {
+  margin-left: 11rem;
 }
 
 .ml-6 {
@@ -1043,10 +1043,6 @@ select {
 
 .mr-96 {
   margin-right: 24rem;
-}
-
-.mt-0\.5 {
-  margin-top: 0.125rem;
 }
 
 .mt-1 {
@@ -1107,14 +1103,6 @@ select {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.ml-20 {
-  margin-left: 5rem;
-}
-
-.ml-44 {
-  margin-left: 11rem;
 }
 
 .block {
@@ -1369,10 +1357,6 @@ select {
   align-items: center;
 }
 
-.items-baseline {
-  align-items: baseline;
-}
-
 .justify-start {
   justify-content: flex-start;
 }
@@ -1387,10 +1371,6 @@ select {
 
 .justify-items-center {
   justify-items: center;
-}
-
-.gap-1 {
-  gap: 0.25rem;
 }
 
 .gap-2 {
@@ -1485,16 +1465,8 @@ select {
   margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
 }
 
-.place-self-center {
-  place-self: center;
-}
-
 .self-center {
   align-self: center;
-}
-
-.justify-self-center {
-  justify-self: center;
 }
 
 .overflow-hidden {
@@ -1712,11 +1684,6 @@ select {
 
 .fill-current {
   fill: currentColor;
-}
-
-.object-center {
-  -o-object-position: center;
-     object-position: center;
 }
 
 .p-1 {
