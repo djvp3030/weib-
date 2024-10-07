@@ -47,11 +47,12 @@ def compra_s(request,id):
       send_mail(
         subject,message,
         settings.EMAIL_HOST_USER,
-        ['deividjvargas30@gmail.com'],
+        ['Weibservicios@gmail.com'],
         fail_silently=False,
       )
     
     except Exception as e:
+      
       print(f'Error al enviar el correo: {e}')
 
     return render(request, 'main.html')
@@ -95,7 +96,7 @@ def compra_t(request,id):
       send_mail(
         subject,message,
         settings.EMAIL_HOST_USER,
-        ['deividjvargas30@gmail.com'],
+        ['Weibca@gmail.com'],
         fail_silently=False,
       )
     except Exception as e:
