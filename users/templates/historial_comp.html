@@ -9,17 +9,13 @@ de compras {%endblock%}
     >
       <th class="p-4 border-2 border-[#0097b2]">producto</th>
       <th class="p-4 border-2 border-[#0097b2]">tamaño</th>
-      <th class="p-4 border-2 border-[#0097b2]">precio</th>
       <th class="p-4 border-2 border-[#0097b2]">fecha de compra</th>
-      <th class="p-4 border-2 border-[#0097b2]">metodo de pago</th>
       <th class="p-4 border-2 border-[#0097b2]">pago</th>
       {%for i in productos%}
       <tr>
         <td class="p-4 border-2 border-[#0097b2]">{{i.producto}}</td>
         <td class="p-4 border-2 border-[#0097b2]">{{i.tamaño}}</td>
-        <td class="p-4 border-2 border-[#0097b2]">{{i.precio}}</td>
         <td class="p-4 border-2 border-[#0097b2]">{{i.fechaCompra}}</td>
-        <td class="p-4 border-2 border-[#0097b2]">{{i.metodo_pago}}</td>
         {%if i.pago == False %}
         <td class="p-4 border-2 border-[#0097b2]">pendiente</td>
         {%else%}

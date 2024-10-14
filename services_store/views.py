@@ -82,11 +82,7 @@ def compra_t(request,id):
     
     
     subject = 'una solicitud de servicio ha sido realizada'
-    message = f'''el usuario {name} ha realizado una peticion del servicio {request.POST['servicio']}. 
-    
-    Direccion: {request.POST['direccion']}
-    
-    Fecha de solicitud: {request.POST['fecha-de-cita']}
+    message = f'''el usuario {name} ha realizado una peticion del servicio {request.POST['producto']}. 
     
     Correo del cliente : {user_email}
     
