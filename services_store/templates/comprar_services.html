@@ -1,0 +1,159 @@
+{%extends 'Header_footer.html' %} {% load static %}
+
+<head>
+  {%block tittle%}Confirmar Solicitud{%endblock%}
+</head>
+
+<body>
+  {%block content%}
+  <div class="justify-between flex px-10 mt-10 min-h-screen">
+    <div class="flex justify-start">
+      <div class="flex items-center ml-28">
+        <div class="relative w-96 mx-auto h-96">
+          <div
+            id="imageCarousel"
+            class="flex overflow-hidden relative h-70 w-96 rounded-lg shadow-lg items-center"
+          >
+            <div
+              class="flex items-center transition-transform duration-500 ease-in-out"
+              style="transform: translateX(0%)"
+            >
+              <img
+                src="{{service.img_prev.url}}"
+                class="w-96 h-96 flex-shrink-0"
+                alt="Imagen 1"
+              />
+              <img
+                src="{{service.img_comp.url}}"
+                class="w-96 h-96 flex-shrink-0"
+                alt="Imagen 2"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Controles -->
+        <button
+          id="prevButton"
+          class="absolute top-1/2 left-0 transform -translate-y-1/2 text-white p-2 rounded-full focus:outline-none"
+        >
+          ‹
+        </button>
+        <button
+          id="nextButton"
+          class="absolute top-1/2 right-0 transform -translate-y-1/2 text-white p-2 rounded-full focus:outline-none"
+        >
+          ›
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="flex flex-col mr-40 w-96 h-screen items-center justify-center -mt-40 border border-stone-300 space-y-5 pt-4"
+    >
+      <p class="text-2xl">Compra</p>
+      
+      <p class="text-xl"></p>
+        {{user.first_name}} {{user.last_name}}
+      </p>
+
+      <p class="text-lg">{{service.nombre}}</p>
+      <p>{{service.descripcion}}</p>
+
+      
+
+      <button class="rounded-xl w-40 h-8 hover:bg-slate-300 pb-1.5 text-xl" id="abrir">
+        comprar 
+      </button>
+
+      <div class="flex justify-center items-center ">
+        
+        <dialog id="modal" class="p-20 rounded-lg space-y-2">
+            <div class="">
+              <h3 class="mb-4 text-center text-xl">¿esta seguro de solucitar el servicio {{service.nombre}}?</h3>
+
+              <p class="my-3 text-lg">para solicitar este servicio se necestica hacer una reservacion para que un experto se ponga en contacto con usted y asi hacer un estudio de la zona para posteriormente realizar el servicio, las cuestiones de precio y tiempo que se llevara en realizar el servicio el experto tambien se lo hara saber el dia del estudio, si esta seguro en obtener el servicio ingrese los siguientes datos</p>
+
+        <form method="post" class="flex flex-col">
+          {% csrf_token %}
+        <label for="" >fecha para cita</label>
+        <input type="date" name="fecha-de-cita" id="fecha-de-cita"/>
+
+        <label for="">Ingrese direccion </label>
+        <input type="text" name="direccion" id="direccion"/>
+
+        <input type="hidden" name="correo" value="{{user.email}}">
+        <input type="hidden" name="telefono" value="{{user.telefono}}">
+        <input type="hidden" name="name" value="{{user.first_name}} {{user.last_name}}">
+
+        <input
+          type="hidden"
+          value="{{user.id}}"
+          name="id_user" id="id_user"
+        />
+        <input type="hidden" value="{{service.nombre}}" name="servicio"  id="servicio"/>
+        <input type="hidden" name="telefono" id="telefono" value="{{user.telefono}}">
+          <button type="submit" class="bg-[#33b2d9] text-white p-2 px-4 rounded-full hover:scale-110 transition duration-300 absolute mt-40"
+              >enviar</button> 
+      </form> 
+                <button id="cerrar" class="bg-[#fdbc3b] p-2 px-4 rounded-full hover:scale-110 transition duration-300 text-white ml-24 mt-3">
+                  cerrar
+                  </button>
+              </div>
+            </div>
+        </dialog>
+
+       
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const imageCarousel =
+      document.getElementById("imageCarousel").firstElementChild;
+    const prevButton = document.getElementById("prevButton");
+    const nextButton = document.getElementById("nextButton");
+
+    let currentIndex = 0;
+
+    function updateImageCarousel() {
+      const width = imageCarousel.clientWidth;
+      imageCarousel.style.transform = `translateX(-${currentIndex * width}px)`;
+    }
+
+    prevButton.addEventListener("click", () => {
+      currentIndex =
+        currentIndex > 0 ? currentIndex - 1 : imageCarousel.children.length - 1;
+      updateImageCarousel();
+    });
+
+    nextButton.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % imageCarousel.children.length;
+      updateImageCarousel();
+    });
+
+    window.addEventListener("resize", updateImageCarousel);
+
+    // Cambio automático cada 3 segundos
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % imageCarousel.children.length;
+      updateImageCarousel();
+    }, 3000); // Cambia el valor (3000 ms) para ajustar el intervalo de tiempo
+  </script>
+
+  <script>
+    const abrir = document.querySelector("#abrir");
+    const modal = document.querySelector("#modal");
+    const cerrar = document.querySelector("#cerrar");
+
+    abrir.addEventListener("click", () => {
+      modal.showModal();
+    });
+
+    cerrar.addEventListener("click", () => {
+      modal.close();
+    });
+  </script>
+
+  {%endblock%}
+</body>

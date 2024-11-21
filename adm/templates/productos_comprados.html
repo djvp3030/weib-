@@ -1,0 +1,21 @@
+{%extends 'main_ms.html' %} {%block tittle%} productos comprados {%endblock%}
+
+<div class=>
+  {%block content%}
+  <table class="mt-16 mx-10 ml-44">
+    <th class="p-4 border-2 border-stone-300">solicitante</th>
+    <th class="p-4 border-2 border-stone-300">producto</th>
+    <th class="p-4 border-2 border-stone-300">cantidad</th>
+    <th class="p-4 border-2 border-stone-300">fecha de compra</th>
+    {%for i in productos%}
+    <tr>
+      <td class="p-4 border-2 border-stone-300">{{i.solicitante}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.producto}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.tamaño}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.fechaCompra}}</td>
+    </tr>
+    {%endfor%}
+  </table>
+
+  {%endblock%}
+</div>

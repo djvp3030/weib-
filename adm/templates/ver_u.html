@@ -1,0 +1,100 @@
+{%extends 'main_ms.html' %} {%block tittle%} usuarios {%endblock%}
+<div class="">
+  {%block content%}
+  <table class="mt-16 mx-10">
+    <th class="p-4 border-2 border-stone-300">Nombres</th>
+    <th class="p-4 border-2 border-stone-300">Apellidos</th>
+    <th class="p-4 border-2 border-stone-300">Numero telefonico</th>
+    <th class="p-4 border-2 border-stone-300">Correo</th>
+    <th class="p-4 border-2 border-stone-300">Nombre de usuario</th>
+    <th class="p-4 border-2 border-stone-300">Admin</th>
+    <th class="p-4 border-2 border-stone-300">Moderador</th>
+    {%for i in users%}
+    <tr>
+      <td class="p-4 border-2 border-stone-300">{{i.first_name}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.last_name}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.telefono}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.email}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.username}}</td>
+      <td class="p-4 border-2 border-stone-300">
+        {%if i.is_admin == False%}
+        <svg
+          class="h-8 w-8 text-gray-900 ml-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+        {%else%}
+        <svg
+          class="h-8 w-8 text-gray-900 ml-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+
+        {%endif%}
+      </td>
+      <td class="flex p-4 border-2 border-stone-300 justify-center">
+        {%if i.staff == False%}
+        <svg
+          class="h-8 w-8 text-gray-900"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+        {%else%}
+        <svg
+          class="h-8 w-8 text-gray-900"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+
+        {%endif%}
+      </td>
+      <td class="p-4 border-2 border-stone-300">
+        <a
+          href="{%url 'EditU' i.id%}"
+          class="rounded duration-200 hover:text-lg hover:bg-stone-300"
+          >editar</a
+        >
+      </td>
+      <td class="p-4 border-2 border-stone-300">
+        <a
+          href="{%url 'DeleteU' i.id%}"
+          class="rounded duration-200 hover:text-lg hover:bg-stone-300"
+          >eliminar</a
+        >
+      </td>
+    </tr>
+    {%endfor%}
+  </table>
+
+  <ul>
+    <li>{{i}}</li>
+  </ul>
+</div>
+
+{%endblock%}

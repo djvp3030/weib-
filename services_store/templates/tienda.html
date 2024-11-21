@@ -1,0 +1,40 @@
+{%extends 'Header_footer.html' %} {% load static %}
+
+<head>
+  {%block tittle%} Tienda {%endblock%}
+</head>
+<body>
+  {%block content%}
+  <div
+    class="mx-10 h-fit w-max grid grid-cols-4 gap-2 justify-center min-h-screen"
+  >
+    <!-- tarjetas -->
+    {%for i in tienda%}
+
+    <div
+      class="flex flex-col items-center w-80 h-96 space-y-2 border border-stone-400 shadow-sm my-4 mx-4 pb-2 duration-200 hover:scale-105 rounded"
+    >
+      <h2
+        class="flex w-full justify-center pt-4 text-2xl border-b border-stone-400 pb-1"
+      >
+        {{i.nombre}}
+      </h2>
+      <div class="flex flex-col space-y-4 place-content-center">
+        <img
+          src="{{i.img_prev.url}}"
+          alt=""
+          class="flex justify-center bg-[#4baa38] rounded-md w-64 h-52 py-1.5 px-1.5 mt-4 mb-2"
+        />
+
+        <a
+          href="{%url 'tiendaC' i.id%}"
+          class="flex justify-center text-xl pb-1 duration-300 hover:bg-[#8dff6b] hover:scale-110 rounded-md"
+          >comprar</a
+        >
+      </div>
+    </div>
+
+    {%endfor%}
+  </div>
+  {%endblock%}
+</body>

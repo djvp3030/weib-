@@ -1,0 +1,119 @@
+{%extends 'Header_footer.html' %} {% load static %}
+<head>
+  {%block tittle%} Perfil de usuario {%endblock%}
+</head>
+<body class="">
+  {%block content%}
+  <div
+    class="flex place-content-center bg-gradient-to-b from-[#fdbc3b] h-screen"
+  >
+
+    <div
+      class="shadow-xl my-20 w-1/2 flex flex-col items-center justify-center bg-[#d9d9d9] rounded-lg"
+    >
+      <div class="flex flex-col space-y-3 my-8 text-xl">
+        <p>nombre de usuario: {{request.user.username}}</p>
+        <p>nombre: {{request.user.first_name}}</p>
+        <p>apellido: {{request.user.last_name}}</p>
+        <p>telefono: {{request.user.telefono}}</p>
+        <p>correo: {{request.user.email}}</p>
+      </div>
+
+      <div class="space-x-4 mx-2 mb-8 mt-2">
+        <div class="text-lg">
+          <button
+            class="transition duration-150 hover:scale-110 rounded-lg hover:bg-[#6bcf5a]/80 p-1.5 px-8"
+            id="abrir-editar"
+          >
+            editar
+          </button>
+          <button
+            class="transition duration-150 hover:scale-110 rounded-lg hover:bg-[#6bcf5a]/80 p-1.5 px-8"
+            id="abrir-eliminar"
+          >
+            eliminar
+          </button>
+        </div>
+        <div class="flex justify-center">
+          <dialog
+            class="rounded-full items-center bg-stone-200"
+            id="modal-eliminar"
+          >
+            <div class="p-20">
+              <p class="text-xl">
+                ¿Desea eliminar el usario? se perderan todos los registros del
+                mismo
+              </p>
+              <div class="mt-10 text-lg space-x-4">
+                <button
+                  class="bg-[#fdbc3b] p-2 rounded-full hover:scale-110 transition duration-300 text-white"
+                >
+                  <a href="{%url 'EliminarU' user.id%}">aceptar</a>
+                </button>
+
+                <button
+                  class="bg-[#33b2d9] text-white p-2 rounded-full hover:scale-110 transition duration-300"
+                  id="cerrar-eliminar"
+                >
+                  cancelar
+                </button>
+              </div>
+            </div>
+          </dialog>
+        </div>
+
+        <div class="flex justify-center">
+          <dialog
+            class="rounded-xl items-center bg-stone-200"
+            id="modal-editar"
+          >
+            <form method="post" class="p-14 space-y-2">
+              {% csrf_token %} {{form.as_p}}
+              <div class="mt-10 text-lg space-x-4">
+                {%if request.user.is_admin == False%}
+                <button
+                  type="submit"
+                  class="bg-[#fdbc3b] p-2 px-4 rounded-full hover:scale-110 transition duration-300 text-white"
+                >
+                  enviar
+                </button>
+                {%endif%}
+                <button
+                  class="bg-[#33b2d9] text-white p-2 rounded-full hover:scale-110 transition duration-300"
+                  id="cerrar-editar"
+                >
+                  <a href="{%url 'verUN' user.id%}">cancelar</a>
+                </button>
+              </div>
+            </form>
+          </dialog>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const abrir_eliminar = document.querySelector("#abrir-eliminar");
+    const modal_eliminar = document.querySelector("#modal-eliminar");
+    const cerrar_elimnar = document.querySelector("#cerrar-eliminar");
+    const abrir_editar = document.querySelector("#abrir-editar");
+    const modal_editar = document.querySelector("#modal-editar");
+    const cerrar_editar = document.querySelector("#cerrar-editar");
+
+    abrir_eliminar.addEventListener("click", () => {
+      modal_eliminar.showModal();
+    });
+
+    cerrar_elimnar.addEventListener("click", () => {
+      modal_eliminar.close();
+    });
+
+    abrir_editar.addEventListener("click", () => {
+      modal_editar.showModal();
+    });
+
+    cerrar_editar.addEventListener("click", () => {
+      modal_editar.close();
+    });
+  </script>
+  {%endblock%}
+</body>

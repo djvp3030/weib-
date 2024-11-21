@@ -1,0 +1,32 @@
+{%extends 'Header_footer.html' %} {% load static %} {%block tittle%} Servicios solicitados
+{%endblock%}
+
+<div class="">
+  {%block content%}
+<div class="flex justify-center h-screen bg-gradient-to-b from-[#6bcf5a]">
+  <table class="flex justify-center items-center  my-20 px-20  shadow-lg bg-[#d9d9d9]">
+    <th class="p-4 border-4 border-[#4baa38]">servicio</th>
+    <th class="p-4 border-4 border-[#4baa38]">telefono</th>
+    <th class="p-4 border-4 border-[#4baa38]">fecha de cita</th>
+    <th class="p-4 border-4 border-[#4baa38]">direccion</th>
+    <th class="p-4 border-4 border-[#4baa38]">fecha realizada</th>
+    <th class="p-4 border-4 border-[#4baa38]">estado</th>
+    <th class="p-4 border-4 border-[#4baa38]">fecha de finalizacion</th>
+    {%for i in servicio%}
+    <tr>
+      <td class="p-4 border-4 border-[#4baa38]">{{i.servicio}}</td>
+      <td class="p-4 border-4 border-[#4baa38]">{{i.telefono}}</td>
+      <td class="p-4 border-4 border-[#4baa38]">{{i.fechaDeCita}}</td>
+      <td class="p-4 border-4 border-[#4baa38]">{{i.direccion}}</td>
+      <td class="p-4 border-4 border-[#4baa38]">{{i.fechaSolicitada}}</td>
+      <td class="p-4 border-4 border-[#4baa38]">{{i.estado}}</td>
+      {%if i.fechaFinalizado != None%}
+      <td class="p-4 border-4 border-[#4baa38]">{{i.fechaFinalizado}}</td>
+      {%endif%}
+      </td>
+    </tr>
+    {%endfor%}
+  </table>
+</div>
+  {%endblock%}
+</div>

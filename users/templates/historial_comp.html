@@ -1,0 +1,31 @@
+{%extends 'Header_footer.html' %} {% load static %} {%block tittle%} Historial
+de compras {%endblock%}
+
+<div>
+  {%block content%}
+  <div
+    class="flex justify-center h-screen bg-gradient-to-b from-[#33b2d9] blur-xl"
+  >
+    <table
+      class="flex justify-center items-center my-20 px-20 shadow-lg bg-[#d9d9d9]"
+    >
+      <th class="p-4 border-2 border-[#0097b2]">producto</th>
+      <th class="p-4 border-2 border-[#0097b2]">tamaño</th>
+      <th class="p-4 border-2 border-[#0097b2]">fecha de compra</th>
+      <th class="p-4 border-2 border-[#0097b2]">pago</th>
+      {%for i in productos%}
+      <tr>
+        <td class="p-4 border-2 border-[#0097b2]">{{i.producto}}</td>
+        <td class="p-4 border-2 border-[#0097b2]">{{i.tamaño}}</td>
+        <td class="p-4 border-2 border-[#0097b2]">{{i.fechaCompra}}</td>
+        {%if i.pago == False %}
+        <td class="p-4 border-2 border-[#0097b2]">pendiente</td>
+        {%else%}
+        <td class="p-4 border-2 border-[#0097b2]">pago</td>
+        {%endif%}
+      </tr>
+      {%endfor%}
+    </table>
+  </div>
+  {%endblock%}
+</div>

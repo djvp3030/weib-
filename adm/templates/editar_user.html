@@ -1,0 +1,16 @@
+{%extends 'main_ms.html' %} {%block tittle%} editar usuarios {%endblock%}
+
+<body>
+  {%block content%}
+  <form method="post" class="ml-12 mr-96 space-y-4">
+    {% csrf_token %} {{form.as_p}}
+
+    <button
+      type="submit"
+      class="font-semibold w-40 text-cyan-200 rounded-lg h-8 bg-black text-md duration-200 hover:scale-110 hover:text-cyan-300 hover:text-lg focus:text-cyan-100"
+    >
+      Editar
+    </button>
+  </form>
+  {%endblock%}
+</body>

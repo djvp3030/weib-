@@ -1,0 +1,90 @@
+{%extends 'main_ms.html' %} {%block tittle%} servicios solicitados {%endblock%}
+
+<div>
+  {%block content%}
+
+  <table class="mt-16 mx-10">
+    <th class="p-4 border-2 border-stone-300">solicitante</th>
+    <th class="p-4 border-2 border-stone-300">servicio</th>
+    <th class="p-4 border-2 border-stone-300">telefono</th>
+    <th class="p-4 border-2 border-stone-300">fecha de cita</th>
+    <th class="p-4 border-2 border-stone-300">direccion</th>
+    <th class="p-4 border-2 border-stone-300">fecha realizada</th>
+    <th class="p-4 border-2 border-stone-300">estado</th>
+    <th class="p-4 border-2 border-stone-300">fecha de finalizacion</th>
+    <th class="p-4 border-2 border-stone-300">cambiar de estado</th>
+    {%for i in servicio%}
+    <tr>
+      <td class="p-4 border-2 border-stone-300">{{i.solicitante}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.servicio}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.telefono}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.fechaDeCita}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.direccion}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.fechaSolicitada}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.estado}}</td>
+      <td class="p-4 border-2 border-stone-300">{{i.fechaFinalizado}}</td>
+      <td class="p-4 border-2 border-stone-300">
+        <button
+          class="hover:scale-110 hover:bg-slate-400 rounded-lg"
+          id="abrir-{{ forloop.counter }}"
+        >
+          cambiar de estado
+        </button>
+
+        <div>
+          <dialog id="modal-{{ forloop.counter }}" class="p-20 rounded-xl">
+            <div>
+              <form action="" method="post" class="space-x-6">
+                {% csrf_token %}
+                <select name="estado" id="">
+                  <option value="">---</option>
+                  <option value="en proceso">en proceso</option>
+                  <option value="finalizado">finalizado</option>
+                  <option value="pendiente">pendiente</option>
+                </select>
+
+                <input type="date" name="fecha_finalizacion" id="" />
+                <input type="hidden" name="id_factura" value="{{i.id}}" />
+
+                <button
+                  type="submit"
+                  class="absolute mt-16 right-96 hover:bg-slate-300 p-2 px-4 rounded-full text-lg"
+                >
+                  editar
+                </button>
+              </form>
+            </div>
+            <button
+              id="cerrar-{{ forloop.counter }}"
+              class="ml-10 mt-1.5 hover:bg-slate-300 p-2 px-4 rounded-full text-lg"
+            >
+              cerrar
+            </button>
+          </dialog>
+        </div>
+      </td>
+    </tr>
+    {%endfor%}
+  </table>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const botonesAbrir = document.querySelectorAll('[id^="abrir-"]');
+      const modales = document.querySelectorAll('[id^="modal-"]');
+      const botonesCerrar = document.querySelectorAll('[id^="cerrar-"]');
+
+      botonesAbrir.forEach((boton, index) => {
+        boton.addEventListener("click", () => {
+          modales[index].showModal();
+        });
+      });
+
+      botonesCerrar.forEach((boton, index) => {
+        boton.addEventListener("click", () => {
+          modales[index].close();
+        });
+      });
+    });
+  </script>
+  {%endblock%}
+</div>

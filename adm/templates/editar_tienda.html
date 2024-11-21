@@ -1,0 +1,59 @@
+{%extends 'main_ms.html' %} {%block tittle%} editar productos {%endblock%}
+
+<div>
+  {%block content%}
+  <div class="flex space-x-8 justify-center ml-44 mt-10">
+    <div class="grid grid-cols-1">
+      <form
+        method="post"
+        enctype="multipart/form-data"
+        class="flex space-x-20 mt-10 justify-center"
+      >
+        <div class="space-y-4">
+          {% csrf_token %} {{form.as_p}}
+          <button
+            type="submit"
+            class="font-semibold w-40 text-cyan-200 rounded-lg h-8 bg-black text-md duration-200 hover:scale-110 hover:text-cyan-300 hover:text-lg focus:text-cyan-100"
+          >
+            Enviar
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="grid grid-cols-1 mt-2">
+      <ul class="space-y-4 mt-10">
+        {%for i in tamaño%}
+        <li>
+          <div class="flex space-x-4">
+            <a
+              href="#"
+              onclick="document.getElementById('edit-form-{{ i.id }}').style.display='block';"
+              class="transition duration-300 p-1 text-lg rounded-md hover:scale-110"
+              >Editar</a
+            >
+            <div id="edit-form-{{ i.id }}" style="display: none">
+              <form method="post">
+                {% csrf_token %} {{ form2.as_p }}
+                <input type="hidden" name="size_id" value="{{ i.id }}" />
+                <button
+                  type="submit"
+                  class="mt-2 transition duration-300 p-1 text-lg rounded-md hover:scale-110 hover:bg-[#fdbc3b]"
+                >
+                  Guardar
+                </button>
+              </form>
+            </div>
+            <a
+              href="{%url 'DeleteSZ' i.id%} "
+              class="transition duration-300 p-1 text-lg rounded-md hover:scale-110"
+              >eliminar</a
+            >
+          </div>
+        </li>
+        {%endfor%}
+      </ul>
+    </div>
+  </div>
+  {%endblock%}
+</div>

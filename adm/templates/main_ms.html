@@ -1,0 +1,177 @@
+{% load static %} {% load static tailwind_tags %}
+<head>
+  {% tailwind_css %}
+  <title>{%block tittle%} apartado admin {%endblock%}</title>
+</head>
+
+<body class="bg-gray-200">
+  <header>
+    <div
+      class="flex justify-between items-center h-15 px-4 py-1.5 border-b border-stone-400"
+      id="dropdownbutton"
+    >
+      <!-- logo -->
+      <div>
+        <a href="/main">
+          <img
+            src="{%static 'imgs/logo.png'%}"
+            class="h-14 w-14 ease-in duration-300 hover:scale-125 hover:-rotate-1"
+          />
+        </a>
+      </div>
+
+      <!-- user -->
+      <div
+        class="ease-in rounded-full relative duration-300 hover:scale-110 hover:bg-amber-500 hover:rotate-3 mr-4 h-8 w-8"
+        onclick="toggleDropdown()"
+      >
+        <svg
+          class="text-neutral-900"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+      </div>
+
+      <div class="flex absolute top-20 right-36 ml-auto">
+        <div
+          class="flex flex-col absolute shadow-md hidden w-32 rounded pl-1"
+          id="dropdown"
+        >
+          <a
+            href="{%url 'logout'%}"
+            class="rounded-md duration-200 hover:bg-amber-400 hover:scale-105"
+            >cerrar sesion</a
+          >
+          <a
+            href="{%url 'Sm_main'%}"
+            class="rounded-md duration-200 hover:bg-amber-400 hover:scale-105"
+            >admin</a
+          >
+          <a href=""></a>
+          <a
+            href="{%url 'main'%}"
+            class="rounded-md duration-200 hover:bg-amber-400 hover:scale-105"
+            >Pag principal</a
+          >
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- barra lateral -->
+  <div class="flex">
+    <div class="grid grid-flow-col-dense h-full w-fit">
+      <div
+        class="border-stone-400 border-y-2 border-r-2 flex mt-20 w-52 h-fit pb-4"
+        id="dropdownbutton1"
+      >
+        <div class="flex flex-col">
+          {%if request.user.is_admin%}
+          <a
+            href="{%url 'Aservices'%}"
+            class="ml-6 mt-6 hover:bg-[#0097b2]/25 flex rounded w-40 duration-200 hover:scale-105"
+            >Crear Servicios</a
+          >
+
+          <button
+            href="{%url 'Aprod'%}"
+            class="ml-6 absolute mt-20 hover:bg-[#0097b2]/25 flex rounded w-40 duration-200 hover:scale-105"
+            onclick="toggleDropdown1()"
+          >
+            Crear Producto
+          </button>
+
+          <div
+            class="flex flex-col absolute hidden w-40 h-14 ml-6 mt-24 justify-start"
+            id="dropdown1"
+          >
+            <a
+              href="{%url 'Aprod'%}"
+              class="ml-6 mt-2 hover:bg-[#0097b2]/25 flex rounded w-32 duration-200 hover:scale-105"
+              >Productos</a
+            >
+
+            <a
+              href="{%url 'Asize'%}"
+              class="ml-6 hover:bg-[#0097b2]/25 flex rounded w-32 duration-200 hover:scale-105"
+              >tamaño</a
+            >
+          </div>
+
+          <a
+            href="{%url 'Ausers'%}"
+            class="ml-6 mt-24 hover:bg-[#0097b2]/25 flex rounded w-40 duration-200 hover:scale-105"
+          >
+            Crear usuario</a
+          >
+          {%endif%} {%if request.user.is_admin or request.user.staff %}
+
+          <a
+            href="{%url 'Vs'%} "
+            class="ml-6 mt-8 hover:bg-[#4baa38]/25 flex rounded w-40 duration-200 hover:scale-105"
+            >Ver Servicios</a
+          >
+
+          <a
+            href="{%url 'Vt'%}"
+            class="ml-6 mt-8 hover:bg-[#4baa38]/25 flex rounded w-40 duration-200 hover:scale-105"
+            >Ver productos</a
+          >
+
+          <a
+            href="{%url 'Vu'%}"
+            class="ml-6 mt-8 hover:bg-[#4baa38]/25 flex rounded w-40 duration-200 hover:scale-105"
+            >Ver usuarios</a
+          >
+
+          <a
+            href="{%url 'servicesSol'%}"
+            class="ml-6 mt-8 hover:bg-[#fdbc3b]/25 rounded w-40 duration-200 hover:scale-105"
+            >servicios solicitados</a
+          >
+
+          <a
+            href="{%url 'productosComp'%}"
+            class="ml-6 mt-8 hover:bg-[#fdbc3b]/25 rounded w-40 duration-200 hover:scale-105"
+            >productos comprados</a
+          >
+
+          {%endif%}
+        </div>
+      </div>
+    </div>
+    {% include 'mensajes/mensajes.html' %} {%block content%} {%endblock%}
+  </div>
+  <script>
+    function toggleDropdown() {
+      let dropdown = document.querySelector("#dropdownbutton #dropdown");
+      dropdown.classList.toggle("hidden");
+    }
+  </script>
+
+  <script>
+    function toggleDropdown1() {
+      let dropdown = document.querySelector("#dropdownbutton1 #dropdown1");
+      dropdown.classList.toggle("hidden");
+    }
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+      const alerts = document.querySelectorAll("#alert-container .relative");
+      alerts.forEach((alert) => {
+        setTimeout(() => {
+          alert.style.transform = "translateX(100%)";
+          setTimeout(() => alert.remove(), 500); // Elimina el elemento después de la animación
+        }, 5000); // Tiempo antes de ocultar el mensaje (5 segundos)
+      });
+    });
+  </script>
+</body>
